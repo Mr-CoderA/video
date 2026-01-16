@@ -1,0 +1,25 @@
+# RunPod Serverless SDK
+runpod>=1.7.0
+
+# PyTorch (usually pre-installed in RunPod base image, but specified for completeness)
+torch>=2.4.0
+torchvision>=0.19.0
+
+# Hugging Face Libraries
+diffusers>=0.32.0
+transformers>=4.46.0
+accelerate>=1.2.0
+safetensors>=0.4.0
+
+# Image/Video Processing
+Pillow>=10.0.0
+imageio[ffmpeg]>=2.34.0
+imageio-ffmpeg>=0.4.9
+
+# Utilities
+sentencepiece>=0.2.0
+protobuf>=4.25.0
+
+# Hugging Face Hub for model downloads
+huggingface-hub>=0.26.0
+

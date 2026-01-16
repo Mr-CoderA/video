@@ -14,9 +14,19 @@ import runpod
 import torch
 import imageio
 from PIL import Image
+from huggingface_hub import login
 from diffusers import AutoencoderKLWan, WanPipeline, WanImageToVideoPipeline
 from diffusers.utils import export_to_video
 from transformers import CLIPVisionModel
+
+# Login to Hugging Face
+HF_TOKEN = os.environ.get("HF_TOKEN")
+if HF_TOKEN:
+    print(f"Logging in to Hugging Face...")
+    login(token=HF_TOKEN)
+    print("Hugging Face login successful!")
+else:
+    print("WARNING: HF_TOKEN not found in environment variables!")
 
 # Global model references
 t2v_pipeline = None
@@ -42,11 +52,13 @@ def load_models() -> None:
         T2V_MODEL_ID,
         subfolder="vae",
         torch_dtype=torch.float32,
+        token=HF_TOKEN,
     )
     t2v_pipeline = WanPipeline.from_pretrained(
         T2V_MODEL_ID,
         vae=vae_t2v,
         torch_dtype=torch.bfloat16,
+        token=HF_TOKEN,
     )
     t2v_pipeline.to("cuda")
     print("T2V pipeline loaded successfully.")
@@ -56,17 +68,20 @@ def load_models() -> None:
         I2V_MODEL_ID,
         subfolder="image_encoder",
         torch_dtype=torch.float32,
+        token=HF_TOKEN,
     )
     vae_i2v = AutoencoderKLWan.from_pretrained(
         I2V_MODEL_ID,
         subfolder="vae",
         torch_dtype=torch.float32,
+        token=HF_TOKEN,
     )
     i2v_pipeline = WanImageToVideoPipeline.from_pretrained(
         I2V_MODEL_ID,
         vae=vae_i2v,
         image_encoder=image_encoder,
         torch_dtype=torch.bfloat16,
+        token=HF_TOKEN,
     )
     i2v_pipeline.to("cuda")
     print("I2V pipeline loaded successfully.")

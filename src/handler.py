@@ -32,9 +32,9 @@ else:
 t2v_pipeline = None
 i2v_pipeline = None
 
-# Model configuration
-T2V_MODEL_ID = "Wan-AI/Wan2.2-T2V-14B-Diffusers"
-I2V_MODEL_ID = "Wan-AI/Wan2.2-I2V-14B-480P-Diffusers"
+# Model configuration - Wan 2.1 with correct naming (A14B = 14 Billion parameters)
+T2V_MODEL_ID = "Wan-AI/Wan2.1-T2V-A14B-Diffusers"
+I2V_MODEL_ID = "Wan-AI/Wan2.1-I2V-A14B-480P-Diffusers"
 
 # Resolution presets
 RESOLUTION_PRESETS = {
